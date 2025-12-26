@@ -56,4 +56,37 @@
                 return true;
             }
         }
+
+
+        /*----------  Funcion para ejecutar una consulta INSERT preparada  ----------*/
+        protected function guardarDatos($tabla,$datos){
+
+            $query="INSERT INTO $tabla (";
+
+            $C=0;
+            foreach($datos as $clave){
+                if($C>=1){ $query.=","; }
+                $query.=$clave["campo_nombre"];
+                $C++;
+            }
+
+            $query.=") VALUES(";
+
+            $C=0;
+            foreach($datos as $clave){
+                if($C>=1){ $query.=","; }
+                $query.="'".$clave["campo_valor"]."'";
+                $C++;
+            }
+
+            $query.=")";
+
+            $sql=$this->conectar();
+            $sql->beginTransaction();
+            $sql->prepare($query);
+
+            $sql->exec($query);
+
+            return $sql;
+        }
     }
