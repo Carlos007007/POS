@@ -89,4 +89,23 @@
 
             return $sql;
         }
+
+
+        /*---------- Funcion seleccionar datos ----------*/
+        public function seleccionarDatos($tipo,$tabla,$campo,$id){
+            $tipo=$this->limpiarCadena($tipo);
+            $tabla=$this->limpiarCadena($tabla);
+			$campo=$this->limpiarCadena($campo);
+			$id=$this->limpiarCadena($id);
+
+            if($tipo=="Unico"){
+                $sql=$this->conectar()->prepare("SELECT * FROM $tabla WHERE $campo=:ID");
+                $sql->bindParam(":ID",$id);
+            }elseif($tipo=="Normal"){
+                $sql=$this->conectar()->prepare("SELECT $campo FROM $tabla");
+            }
+            $sql->execute();
+
+            return $sql;
+        }
     }
