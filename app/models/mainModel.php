@@ -108,4 +108,28 @@
 
             return $sql;
         }
+
+
+        /*----------  Funcion para ejecutar una consulta UPDATE preparada  ----------*/
+        protected function actualizarDatos($tabla,$datos,$condicion){
+
+            $query="UPDATE $tabla SET ";
+
+            $C=0;
+            foreach($datos as $clave){
+                if($C>=1){ $query.=","; }
+                $query.=$clave["campo_nombre"]."='".$clave["campo_valor"]."'";
+                $C++;
+            }
+
+            $query.=" WHERE ".$condicion["condicion_campo"]."='".$condicion["condicion_valor"]."'";
+
+            $sql=$this->conectar();
+            $sql->beginTransaction();
+            $sql->prepare($query);
+
+            $sql->exec($query);
+
+            return $sql;
+        }
     }
