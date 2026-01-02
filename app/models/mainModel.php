@@ -132,4 +132,19 @@
 
             return $sql;
         }
+
+
+        /*---------- Funcion eliminar registro ----------*/
+        protected function eliminarRegistro($tabla,$campo,$id){
+
+            $query="DELETE FROM $tabla WHERE $campo='$id'";
+
+            $sql=$this->conectar();
+            $sql->beginTransaction();
+            $sql->prepare($query);
+
+            $sql->exec($query);
+
+            return $sql;
+        }
     }
