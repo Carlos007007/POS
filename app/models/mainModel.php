@@ -202,4 +202,27 @@
             $tabla.='</nav>';
             return $tabla;
         }
+
+
+        /*----------  Funcion generar select ----------*/
+        public function generarSelect($datos,$campo_db){
+            $check_select='';
+			$text_select='';
+			$count_select=1;
+			$select='';
+            foreach($datos as $row){
+
+                if($campo_db==$row){
+                    $check_select='selected=""';
+			        $text_select=' (Actual)';
+                }
+
+                $select.='<option value="'.$row.'" '.$check_select.'>'.$count_select.' - '.$row.$text_select.'</option>';
+
+                $check_select='';
+			    $text_select='';
+			    $count_select++;
+            }
+            return $select;
+        }
     }
