@@ -245,4 +245,14 @@
             }
             return $codigo."-".$correlativo;
         }
+
+
+        /*----------  Limitar cadenas de texto  ----------*/
+        public function limitarCadena($cadena,$limite,$sufijo){
+            if(strlen($cadena)>$limite){
+                return substr($cadena,0,$limite).$sufijo;
+            }else{
+                return $cadena;
+            }
+        }
     }
