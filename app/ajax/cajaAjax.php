@@ -4,14 +4,14 @@
     require_once "../views/inc/session_start.php";
     require_once "../../autoload.php";
 
-    use app\controllers\userController;
+    use app\controllers\cashierController;
 
-    if(isset($_POST['modulo_usuario'])){
+    if(isset($_POST['modulo_caja'])){
 
-        $insUsuario = new userController();
+        $insCaja = new cashierController();
 
-        if($_POST['modulo_usuario']=="registrar"){
-            echo $insUsuario->registrarUsuarioControlador();
+        if($_POST['modulo_caja']=="registrar"){
+            echo $insCaja->registrarCajaControlador();
         }
         
     }else{
